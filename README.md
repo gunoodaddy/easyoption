@@ -18,7 +18,8 @@ just include "easyoption.h" in your source or header files. (and copy `strkeymap
 	int test_main(int argc, char *argv[]) {
 
 		easyoption *opt = easyoption_new();
-		
+
+		// if need a additional parameter for option, easyoption_add's 2th argument must be set to string
 		easyoption_add(opt, "-n", "n count", "1 description.. need next parameter");
 		easyoption_add(opt, "-p", "p count", "2 description.. need next parameter");
 		easyoption_add(opt, "-c", "", "solo options");
