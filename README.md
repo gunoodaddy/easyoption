@@ -3,7 +3,7 @@
 
 ## Usage
 
-just include "easyoption.h" in your source or header files. (and copy `strkeymap.h` to your project directory)
+just include `easyoption.h` in your source or header files. (and copy `strkeymap.h` to your project directory)
 
 ## Example
 
