@@ -89,7 +89,7 @@ int easyoption_value(easyoption *opt, const char *key, char **value) {
 	strkeymap_iterator it = strkeymap_find(opt->map, key);
 	if(it.result) {
 		if(value) {
-			*value = *it.second;
+			*value = ((option_context *)*it.second)->value;
 		}
 		return 1;
 	}
