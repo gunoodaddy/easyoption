@@ -79,6 +79,7 @@ int easyoption_parse(easyoption *opt, int argc, char **argv) {
 			return -1;
 		} 
 		ctx->value = val;
+		ctx->on = 1;
 	}
 
 	return 0;
@@ -88,6 +89,10 @@ int easyoption_parse(easyoption *opt, int argc, char **argv) {
 int easyoption_value(easyoption *opt, const char *key, char **value) {
 	strkeymap_iterator it = strkeymap_find(opt->map, key);
 	if(it.result) {
+		option_context *ctx = *it.second;
+		if(!ctx->on)
+			return 0;
+
 		if(value) {
 			*value = ((option_context *)*it.second)->value;
 		}
@@ -127,7 +132,7 @@ void easyoption_print_option(easyoption *opt, FILE *out) {
 	if(it) {
 		do {
 			option_context *ctx = *it->second;
-			fprintf(out, "%s => %s\n", it->first, ctx->value);
+			fprintf(out, "%s => %s (%d)\n", it->first, ctx->value, ctx->on);
 			it = strkeymap_iterator_next(it);
 		} while(it);
 	}

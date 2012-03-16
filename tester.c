@@ -54,7 +54,7 @@ int main() {
 		"100",
 		"-c",
 	};
-	test_main(5, argv1);
+	test_main(6, argv1);
 
 	printf("test ok\n");
 
