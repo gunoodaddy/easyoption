@@ -20,7 +20,7 @@ typedef struct option_context {
 
 
 
-easyoption * easyoption_new() {
+inline easyoption * easyoption_new() {
 	easyoption *opt = (easyoption *)malloc(sizeof(easyoption));
 	memset(opt, 0, sizeof(easyoption));
 	opt->map = strkeymap_new();
@@ -28,7 +28,7 @@ easyoption * easyoption_new() {
 }
 
 
-int	easyoption_add(easyoption *opt, const char *key, const char *valdesc, const char *desc) {
+inline int easyoption_add(easyoption *opt, const char *key, const char *valdesc, const char *desc) {
 
 	strkeymap_iterator it = strkeymap_find(opt->map, key);
 	if(it.result) {
@@ -50,7 +50,7 @@ int	easyoption_add(easyoption *opt, const char *key, const char *valdesc, const 
 	return 0;
 }
 
-int easyoption_parse(easyoption *opt, int argc, char **argv) {
+inline int easyoption_parse(easyoption *opt, int argc, char **argv) {
 	int i;
 	for(i = 1; i < argc; i++) {
 		const char *key = argv[i];
@@ -86,7 +86,7 @@ int easyoption_parse(easyoption *opt, int argc, char **argv) {
 }
 
 
-int easyoption_value(easyoption *opt, const char *key, char **value) {
+inline int easyoption_value(easyoption *opt, const char *key, char **value) {
 	strkeymap_iterator it = strkeymap_find(opt->map, key);
 	if(it.result) {
 		option_context *ctx = *it.second;
@@ -102,18 +102,18 @@ int easyoption_value(easyoption *opt, const char *key, char **value) {
 }
 
 
-const char * easyoption_get_lasterror(easyoption *opt) {
+inline const char * easyoption_get_lasterror(easyoption *opt) {
 	return opt->err;
 }
 
 
-void easyoption_free(easyoption *opt) {
+inline void easyoption_free(easyoption *opt) {
 	strkeymap_free(opt->map);
 	free(opt);
 }
 
 
-void easyoption_loop(easyoption *opt, void(*loop)(option_context *)) {
+inline void easyoption_loop(easyoption *opt, void(*loop)(option_context *)) {
 
 	const strkeymap_iterator* it = strkeymap_iterator_new(opt->map);
 	if(it) {
@@ -127,7 +127,7 @@ void easyoption_loop(easyoption *opt, void(*loop)(option_context *)) {
 }
 
 
-void easyoption_print_option(easyoption *opt, FILE *out) {
+inline void easyoption_print_option(easyoption *opt, FILE *out) {
 	const strkeymap_iterator* it = strkeymap_iterator_new(opt->map);
 	if(it) {
 		do {
